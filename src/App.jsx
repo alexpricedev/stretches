@@ -215,7 +215,7 @@ function App() {
       <div className="app">
         <div className="setup-screen">
           <h1>Get Your Stretch On</h1>
-          <h2>Choose your routine length:</h2>
+          <h2>Choose your routine length</h2>
           <div className="routine-options">
             {[
               { count: 3, duration: '7-9 min' },
