@@ -55,6 +55,8 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [stretchPhase, setStretchPhase] = useState('stretch') // stretch, rest
+  const [routineStartTime, setRoutineStartTime] = useState(null)
+  const [totalRoutineTime, setTotalRoutineTime] = useState(0)
 
   const selectRandomStretches = (count) => {
     const shuffled = [...stretches].sort(() => 0.5 - Math.random())
@@ -67,6 +69,8 @@ function App() {
     setGameState('warmup')
     setTimeLeft(15)
     setCurrentStretchIndex(0)
+    setRoutineStartTime(Date.now())
+    setTotalRoutineTime(0)
   }
 
   const getCurrentStretch = () => {
@@ -172,6 +176,7 @@ function App() {
             setStretchPhase('rest')
             setTimeLeft(15)
           } else {
+            setTotalRoutineTime(Math.floor((Date.now() - routineStartTime) / 1000))
             setGameState('complete')
           }
         }
@@ -222,6 +227,8 @@ function App() {
     setTimeLeft(0)
     setIsPaused(false)
     setSelectedStretches([])
+    setRoutineStartTime(null)
+    setTotalRoutineTime(0)
   }
 
   useEffect(() => {
@@ -231,6 +238,16 @@ function App() {
         setTimeLeft(timeLeft - 1)
       }, 1000)
     } else if (timeLeft === 0 && gameState !== 'setup' && gameState !== 'complete') {
+      // Check if this will complete the routine before calling nextPhase
+      const currentStretch = getCurrentStretch()
+      const isLastStretch = currentStretchIndex === selectedStretches.length - 1
+      const willComplete = gameState === 'stretch' && isLastStretch && 
+        (!currentStretch?.bilateral || currentSide === 'right')
+      
+      if (willComplete) {
+        setTotalRoutineTime(Math.floor((Date.now() - routineStartTime) / 1000))
+      }
+      
       nextPhase()
     }
     return () => clearInterval(interval)
@@ -240,6 +257,15 @@ function App() {
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
     return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const formatTotalTime = (seconds) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    if (mins > 0) {
+      return `${mins}m ${secs}s`
+    }
+    return `${secs}s`
   }
 
   const getCurrentTitle = () => {
@@ -280,6 +306,9 @@ function App() {
           <button className="start-btn" onClick={startRoutine}>
             Start Routine
           </button>
+          <div className="audio-reminder">
+            🔔 Set your phone to loud mode to hear completion chimes
+          </div>
         </div>
       </div>
     )
@@ -300,6 +329,10 @@ function App() {
             <div className="stat">
               <span className="stat-number">{getTotalSteps()}</span>
               <span className="stat-label">Total Sides</span>
+            </div>
+            <div className="stat">
+              <span className="stat-number">{formatTotalTime(totalRoutineTime)}</span>
+              <span className="stat-label">Total Time</span>
             </div>
           </div>
           <button className="restart-btn" onClick={resetApp}>
