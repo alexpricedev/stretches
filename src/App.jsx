@@ -214,7 +214,7 @@ function App() {
     return (
       <div className="app">
         <div className="setup-screen">
-          <h1>Stretching App</h1>
+          <h1>Get Your Stretch On</h1>
           <h2>Choose your routine length:</h2>
           <div className="routine-options">
             {[
@@ -311,13 +311,15 @@ function App() {
 
         {(gameState === 'warmup' || gameState === 'rest') && (
           <div className="next-up">
-            <div className="next-up-label">Next Up:</div>
+            <div className="next-up-label">Next Up</div>
             <div className="next-up-name">
               {getNextUp().name}
-              {getNextUp().side && (
-                <span className={`side-tag-outline ${getNextUp().side}`}>{getNextUp().side.toUpperCase()} SIDE</span>
-              )}
             </div>
+            {getNextUp().side && (
+              <div className="next-up-side">
+                <span className={`side-tag-outline ${getNextUp().side}`}>{getNextUp().side.toUpperCase()} SIDE</span>
+              </div>
+            )}
           </div>
         )}
 
