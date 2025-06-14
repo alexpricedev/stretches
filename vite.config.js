@@ -6,6 +6,14 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    allowedHosts: ['ngrok.alexprice.space']
+    allowedHosts: ['ngrok.alexprice.space', 'stretch.alexprice.space']
+  },
+  preview: {
+    port: process.env.PORT ? parseInt(process.env.PORT) : 4173,
+    host: '0.0.0.0'
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets'
   }
 })
