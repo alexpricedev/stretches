@@ -6,7 +6,8 @@ const stretches = [
   { name: "Squat", bilateral: false },
   { name: "Half Split", bilateral: true },
   { name: "Wide Leg Forward Fold", bilateral: false },
-  { name: "Thread the Needle", bilateral: true }
+  { name: "Thread the Needle", bilateral: true },
+  { name: "Lunge", bilateral: true }
 ]
 
 function App() {
