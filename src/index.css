@@ -237,11 +237,11 @@ body {
 }
 
 .stretch-info {
-  margin-bottom: 20px;
+  margin-bottom: 35px;
 }
 
 .stretch-title {
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
   color: #2d3748;
@@ -249,14 +249,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
 }
 
 .side-tag {
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: white;
-  padding: 6px 16px;
+  padding: 8px 20px;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -280,7 +280,7 @@ body {
 }
 
 .next-up {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   padding: 15px;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   border-radius: 16px;
@@ -301,7 +301,7 @@ body {
 }
 
 .next-up-label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #667eea;
   font-weight: 700;
   margin-bottom: 8px;
@@ -320,7 +320,7 @@ body {
 }
 
 .next-up-name {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: #2d3748;
   font-weight: 600;
   line-height: 1.3;
@@ -334,9 +334,9 @@ body {
 }
 
 .side-tag-outline {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 4px 12px;
+  padding: 6px 16px;
   border-radius: 16px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -462,9 +462,14 @@ body {
   }
   
   .stretch-title {
-    font-size: 1.4rem;
+    font-size: 2rem;
     margin-bottom: 8px;
-    gap: 10px;
+    gap: 14px;
+  }
+  
+  .side-tag {
+    font-size: 1.1rem;
+    padding: 6px 16px;
   }
   
   .progress {
@@ -476,16 +481,25 @@ body {
   }
   
   .stretch-info {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   
   .next-up {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     padding: 12px;
   }
   
   .next-up-name {
-    font-size: 1rem;
+    font-size: 1.4rem;
+  }
+  
+  .next-up-label {
+    font-size: 0.9rem;
+  }
+  
+  .side-tag-outline {
+    font-size: 0.9rem;
+    padding: 5px 14px;
   }
   
   .control-btn {
@@ -500,4 +514,6 @@ body {
     height: 30px;
     font-size: 1.5rem;
   }
+}
+
 }

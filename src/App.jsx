@@ -1,5 +1,41 @@
 import React, { useState, useEffect } from 'react'
 
+// Audio utility for playing completion chime
+const playCompletionChime = () => {
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+    
+    // Create a pleasant bell-like sound using multiple frequencies
+    const playTone = (frequency, startTime, duration) => {
+      const oscillator = audioContext.createOscillator()
+      const gainNode = audioContext.createGain()
+      
+      oscillator.connect(gainNode)
+      gainNode.connect(audioContext.destination)
+      
+      oscillator.frequency.setValueAtTime(frequency, startTime)
+      oscillator.type = 'sine'
+      
+      // Create a gentle fade in and out
+      gainNode.gain.setValueAtTime(0, startTime)
+      gainNode.gain.linearRampToValueAtTime(0.1, startTime + 0.01)
+      gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration)
+      
+      oscillator.start(startTime)
+      oscillator.stop(startTime + duration)
+    }
+    
+    // Play a harmonious chord (C major)
+    const now = audioContext.currentTime
+    playTone(523.25, now, 0.8) // C5
+    playTone(659.25, now + 0.1, 0.8) // E5  
+    playTone(783.99, now + 0.2, 0.8) // G5
+    
+  } catch (error) {
+    console.log('Audio not supported or blocked')
+  }
+}
+
 const stretches = [
   { name: "Pigeon", bilateral: true },
   { name: "Toes Pose", bilateral: false },
@@ -116,6 +152,9 @@ function App() {
       setCurrentSide(currentStretch.bilateral ? 'left' : 'single')
       setTimeLeft(120) // 2 minutes
     } else if (gameState === 'stretch') {
+      // Play completion chime when finishing a stretch side
+      playCompletionChime()
+      
       if (currentStretch.bilateral && currentSide === 'left') {
         setGameState('rest')
         setStretchPhase('rest')
@@ -158,6 +197,11 @@ function App() {
 
   const skipCurrent = () => {
     const currentStretch = getCurrentStretch()
+    
+    // Play completion chime when manually skipping a stretch
+    if (gameState === 'stretch') {
+      playCompletionChime()
+    }
     
     // For bilateral stretches on left side, always go to right side (never skip entirely)
     if (gameState === 'stretch' && currentStretch?.bilateral && currentSide === 'left') {
@@ -255,7 +299,7 @@ function App() {
             </div>
             <div className="stat">
               <span className="stat-number">{getTotalSteps()}</span>
-              <span className="stat-label">Total Steps</span>
+              <span className="stat-label">Total Sides</span>
             </div>
           </div>
           <button className="restart-btn" onClick={resetApp}>
