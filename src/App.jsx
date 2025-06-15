@@ -37,7 +37,7 @@ const playCompletionChime = () => {
 }
 
 const stretches = [
-  { name: "Pigeon", bilateral: true },
+  { name: "90/90", bilateral: true },
   { name: "Toes Pose", bilateral: false },
   { name: "Squat", bilateral: false },
   { name: "Half Split", bilateral: true },
@@ -373,7 +373,7 @@ function App() {
         </div>
 
         <div className={`timer ${gameState}`}>
-          <div className="time-display">
+          <div className={`time-display ${timeLeft <= 10 && gameState === 'stretch' ? 'flash' : ''}`}>
             {formatTime(timeLeft)}
           </div>
         </div>

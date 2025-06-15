@@ -390,25 +390,26 @@ body {
 }
 
 .pause-btn {
+  background: white;
+  color: #5a67d8;
+  border-color: #5a67d8;
+}
+
+.pause-btn:hover {
   background: #5a67d8;
   color: white;
   border-color: #5a67d8;
 }
 
-.pause-btn:hover {
-  background: #4c51bf;
-  border-color: #4c51bf;
-}
-
 .skip-btn {
-  background: #48bb78;
+  background: #5a67d8;
   color: white;
-  border-color: #48bb78;
+  border-color: #5a67d8;
 }
 
 .skip-btn:hover {
-  background: #38a169;
-  border-color: #38a169;
+  background: #4c51bf;
+  border-color: #4c51bf;
 }
 
 .reset-btn {
@@ -449,6 +450,21 @@ body {
   .complete-screen h1 {
     font-size: 2.2rem;
   }
+}
+
+@keyframes flash {
+  0%, 50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+.time-display.flash {
+  animation: flash 1s ease-in-out infinite;
 }
 
 @media (max-width: 480px) {
