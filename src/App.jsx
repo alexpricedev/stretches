@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
-// Audio utility for playing completion chime
+// Audio and vibration utility for completion feedback
 const playCompletionChime = () => {
+  // Try vibration first (works well with music playing)
+  try {
+    if (navigator.vibrate) {
+      // Double pulse pattern: vibrate 200ms, pause 100ms, vibrate 200ms
+      navigator.vibrate([200, 100, 200])
+    }
+  } catch (error) {
+    console.log('Vibration not supported')
+  }
+
+  // Then play audio chime
   try {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)()
     
@@ -43,7 +54,9 @@ const stretches = [
   { name: "Half Split", bilateral: true },
   { name: "Wide Leg Forward Fold", bilateral: false },
   { name: "Thread the Needle", bilateral: true },
-  { name: "Lunge", bilateral: true }
+  { name: "Lunge", bilateral: true },
+  { name: "Puppy Pose on Blocks", bilateral: false },
+  { name: "Wrist stretch", bilateral: false }
 ]
 
 function App() {
