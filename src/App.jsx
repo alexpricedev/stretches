@@ -48,7 +48,7 @@ const playCompletionChime = () => {
 }
 
 const stretches = [
-  { name: "90/90", bilateral: true },
+  { name: "90-90", bilateral: true },
   { name: "Toes Pose", bilateral: false },
   { name: "Squat", bilateral: false },
   { name: "Half Split", bilateral: true },
@@ -56,7 +56,8 @@ const stretches = [
   { name: "Thread the Needle", bilateral: true },
   { name: "Lunge", bilateral: true },
   { name: "Puppy Pose on Blocks", bilateral: false },
-  { name: "Wrist stretch", bilateral: false }
+  { name: "Wrist stretch", bilateral: false },
+  { name: "Wide leg forward fold", bilateral: false }
 ]
 
 function App() {
