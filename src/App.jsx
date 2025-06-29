@@ -170,9 +170,6 @@ function App() {
       setCurrentSide(currentStretch.bilateral ? 'left' : 'single')
       setTimeLeft(120) // 2 minutes
     } else if (gameState === 'stretch') {
-      // Play completion chime when finishing a stretch side
-      playCompletionChime()
-      
       if (currentStretch.bilateral && currentSide === 'left') {
         setGameState('rest')
         setStretchPhase('rest')
@@ -252,6 +249,11 @@ function App() {
         setTimeLeft(timeLeft - 1)
       }, 1000)
     } else if (timeLeft === 0 && gameState !== 'setup' && gameState !== 'complete') {
+      // Play completion chime when a stretch finishes automatically
+      if (gameState === 'stretch') {
+        playCompletionChime()
+      }
+      
       // Check if this will complete the routine before calling nextPhase
       const currentStretch = getCurrentStretch()
       const isLastStretch = currentStretchIndex === selectedStretches.length - 1
