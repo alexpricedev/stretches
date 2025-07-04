@@ -57,7 +57,8 @@ const stretches = [
   { name: "Lunge", bilateral: true },
   { name: "Puppy Pose on Blocks", bilateral: false },
   { name: "Wrist stretch", bilateral: false },
-  { name: "Wide leg forward fold", bilateral: false }
+  { name: "Wide leg forward fold", bilateral: false },
+  { name: "Couch stretch", bilateral: true }
 ]
 
 function App() {
